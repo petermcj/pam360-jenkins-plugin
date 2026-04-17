@@ -1,0 +1,23 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:c="/lib/credentials">
+  <f:entry title="API Token Credential" field="credentialId"
+           description="Jenkins Secret text credential that holds the PAM360 AUTHTOKEN for this resource.">
+    <c:select/>
+  </f:entry>
+  <f:entry title="Resource ID" field="resourceId"
+           description="PAM360 resource ID (numeric).">
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="Account ID" field="accountId"
+           description="PAM360 account ID within the resource (numeric).">
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="Environment Variable" field="variable"
+           description="Name of the environment variable that will hold the fetched password inside the block.">
+    <f:textbox/>
+  </f:entry>
+  <f:entry title="PAM360 URL (override)" field="apiUrl"
+           description="Optional. Overrides the globally configured PAM360 URL for this step only.">
+    <f:textbox/>
+  </f:entry>
+</j:jelly>
