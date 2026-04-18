@@ -12,7 +12,6 @@ import org.jenkinsci.plugins.workflow.steps.StepContext;
 import org.jenkinsci.plugins.workflow.steps.StepExecution;
 
 import java.io.IOException;
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -29,7 +28,6 @@ import java.io.Serializable;
  */
 class PAM360StepExecution extends StepExecution {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     private final PAM360Step step;
@@ -98,7 +96,6 @@ class PAM360StepExecution extends StepExecution {
     /** Expands a single environment variable for the block body. */
     private static final class SingleVarExpander extends EnvironmentExpander implements Serializable {
 
-        @Serial
         private static final long serialVersionUID = 1L;
 
         private final String key;

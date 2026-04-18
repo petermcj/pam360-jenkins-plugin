@@ -21,7 +21,9 @@ jobs:
           cache: maven
 
       - name: Build and test
-        run: mvn --batch-mode verify
+        run: mvn --batch-mode --no-transfer-progress verify
+        env:
+          JAVA_TOOL_OPTIONS: -Djava.awt.headless=true
 
       - name: Archive HPI artifact
         if: success()
