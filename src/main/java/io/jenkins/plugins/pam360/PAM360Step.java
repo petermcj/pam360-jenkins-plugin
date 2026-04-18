@@ -101,7 +101,7 @@ public class PAM360Step extends Step {
             }
             return new StandardListBoxModel()
                     .includeEmptyValue()
-                    .includeAs(ACL.SYSTEM, item, StringCredentials.class)
+                    .includeAs(ACL.SYSTEM2, item, StringCredentials.class)
                     .includeCurrentValue(credentialId);
         }
     }
