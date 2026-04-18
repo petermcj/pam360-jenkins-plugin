@@ -20,6 +20,55 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      # Maven needs the Jenkins repos in settings.xml *before* it downloads the
+      # parent POM (plugin parent 6.x is in repo.jenkins-ci.org/incrementals/).
+      - name: Configure Maven settings
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<'EOF'
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                                        https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <profiles>
+              <profile>
+                <id>jenkins</id>
+                <repositories>
+                  <repository>
+                    <id>repo.jenkins-ci.org</id>
+                    <url>https://repo.jenkins-ci.org/public/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                  </repository>
+                  <repository>
+                    <id>incrementals.jenkins-ci.org</id>
+                    <url>https://repo.jenkins-ci.org/incrementals/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                  </repository>
+                </repositories>
+                <pluginRepositories>
+                  <pluginRepository>
+                    <id>repo.jenkins-ci.org</id>
+                    <url>https://repo.jenkins-ci.org/public/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                  </pluginRepository>
+                  <pluginRepository>
+                    <id>incrementals.jenkins-ci.org</id>
+                    <url>https://repo.jenkins-ci.org/incrementals/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                  </pluginRepository>
+                </pluginRepositories>
+              </profile>
+            </profiles>
+            <activeProfiles>
+              <activeProfile>jenkins</activeProfile>
+            </activeProfiles>
+          </settings>
+          EOF
+
       - name: Build and test
         run: mvn --batch-mode --no-transfer-progress verify
         env:

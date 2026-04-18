@@ -41,7 +41,7 @@ mvn hpi:run
 
 ## Architecture
 
-The plugin is a standard Jenkins HPI project with four Java classes and matching Jelly UI files.
+The plugin targets **Jenkins 2.504.3 LTS** (Java 17+) and is a standard Jenkins HPI project with four Java classes and matching Jelly UI files.
 
 ### Class responsibilities
 
